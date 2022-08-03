@@ -15,7 +15,7 @@
         <label for="costo">Costo</label>
         <input type="text" class="form-control" id="costo" placeholder="Costo" v-model="costo" name="costo">
         <br>
-        <button @click.prevent="enviar" class="btn btn-primary" @click="realizarValidaciones">Actualizar Datos</button>
+        <button class="btn btn-primary" @click.prevent="realizarValidaciones()">Actualizar Datos</button>
 
         
     </form>
@@ -67,12 +67,17 @@ export default {
         },
         realizarValidaciones(){
             
-            if( this.validarFechas()
+            if( 
+                this.validarFechas()
                 && this.validardEdad()
                 && this.comprobarEdad()
                 && this.validarLongitudNombres()
                 && this.validarCosto()){
+
                 this.enviar()
+            }
+            else{
+                alert('Faltan datos')
             }
         }
         ,
@@ -124,9 +129,7 @@ export default {
             let anioIns = fechaIns.getFullYear()
             let costo = this.costo
             let diferencia = anioHoy - anioIns
-          
-
-          
+                    
             if((costo /100) - diferencia != 0){
                 alert('El costo no corresponde con la antiguedad')
                 return false
@@ -144,7 +147,7 @@ export default {
             }
         },
         validarLongitudNombres(){
-            if(this.validarNombreyApellido){
+            if(this.validarNombreyApellido()){
                 let nombre = this.nombre.split(' ')
                 if(nombre[0].length != 4 || nombre[1].length != 4){
                     alert('El nombre y apellido deben tener 4 caracteres')

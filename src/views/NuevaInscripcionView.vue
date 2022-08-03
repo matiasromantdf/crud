@@ -132,7 +132,7 @@ export default {
             }
         },
         validarLongitudNombres(){
-            if(this.validarNombreyApellido){
+            if(this.validarNombreyApellido()){
                 let nombre = this.nombre.split(' ')
                 if(nombre[0].length != 4 || nombre[1].length != 4){
                     alert('El nombre y apellido deben tener 4 caracteres')
