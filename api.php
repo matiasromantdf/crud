@@ -5,6 +5,7 @@ $conexion = new PDO('mysql:host=localhost;dbname=abi', 'root', '');
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
+
     $nombre = $_POST['nombre'];
     $edad = $_POST['edad'];
     $fecha_nac = $_POST['fecha_nac'];
@@ -20,6 +21,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 }
 if($_SERVER['REQUEST_METHOD'] == 'GET'){
+
     if($_GET['accion']=='todos'){
         $sql = "SELECT * FROM inscripciones";
         $resultado = $conexion->query($sql);
@@ -42,18 +44,27 @@ if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
     $conexion->exec($sql);
 }
 // update
-// if($_SERVER['REQUEST_METHOD'] == 'PUT' ){
 
-//     $id = $_POST['id'];
-//     $nombre = $_POST['nombre'];
-//     $edad = $_POST['edad'];
-//     $fecha_nac = $_POST['fecha_nac'];
-//     $fecha_insc = $_POST['fecha_insc'];
-//     $costo = $_POST['costo'];
+if($_SERVER['REQUEST_METHOD'] == 'PUT'){
+    
+    $datos = json_decode(file_get_contents("php://input"));
+    $id = $datos->id;
+    $nombre = $datos->nombre;
+    $edad = $datos->edad;
+    $fecha_nac = $datos->fecha_nac;
+    $fecha_insc = $datos->fecha_insc;
+    $costo = $datos->costo;
 
-//     $sql = "UPDATE inscripciones SET nombre = '$nombre', edad = '$edad', fecha_nacimiento = '$fecha_nac', fecha_inscripcion = '$fecha_insc', costo = '$costo' WHERE id = $id";
-//     $conexion->exec($sql);
-// }
+    // $id = $_GET['id'];
+    // $nombre = $_GET['nombre'];
+    // $edad = $_GET['edad'];
+    // $fecha_nac = $_GET['fecha_nac'];
+    // $fecha_insc = $_GET['fecha_insc'];
+    // $costo = $_GET['costo'];
+
+    $sql = "UPDATE inscripciones SET nombre = '$nombre', edad = '$edad', fecha_nacimiento = '$fecha_nac', fecha_inscripcion = '$fecha_insc', costo = '$costo' WHERE id = $id";
+    $conexion->exec($sql);
+}
 
 
 ?>

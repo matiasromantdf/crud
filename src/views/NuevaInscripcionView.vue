@@ -112,8 +112,7 @@ export default {
             let anioIns = fechaIns.getFullYear()
             let costo = this.costo
             let diferencia = anioHoy - anioIns
-            alert(diferencia)
-            alert(costo)
+           
 
           
             if((costo /100) - diferencia != 0){
